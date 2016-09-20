@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+    <springProfile name="production">
+        <appender name="STBRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <File>/home/data/superalsrk/SLF4J/stackbox-eureka/eureka.log</File>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <FileNamePattern>/home/data/superalsrk/SLF4J/stackbox-eureka/eureka.%d{yyyy-MM-dd}.log</FileNamePattern>
+                <maxHistory>3000</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <Pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n</Pattern>
+            </encoder>
+        </appender>
+    </springProfile>
+
+
+    <springProfile name="development">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE" />
+        </root>
+    </springProfile>
+
+    <springProfile name="production">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE" />
+            <!-- <appender-ref ref="STBRollingFileAppender" /> -->
+        </root>
+    </springProfile>
+
+</configuration>
